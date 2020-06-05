@@ -64,7 +64,7 @@ class OrderRepository implements OrderRepositoryInterface
         $order = $this->getConnection()->where('id', $id)->first();
 
         if ($order === null) {
-            throw new RuntimeException('Can\'t find order with id = )' . $id);
+            throw new RuntimeException('Can\'t find order with id = ' . $id);
         }
 
         $customer = $this->customerRepository->findById($order->customer_id);

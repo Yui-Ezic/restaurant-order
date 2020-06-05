@@ -45,7 +45,7 @@ class CustomerRepository implements CustomerRepositoryInterface
         $customer = $this->getConnection()->where('id', $id)->first();
 
         if ($customer === null) {
-            throw new RuntimeException('Can\'t find customer with id = )' . $id);
+            throw new RuntimeException('Can\'t find customer with id = ' . $id);
         }
 
         return new Customer($customer->id, $customer->full_name, $customer->phone);
