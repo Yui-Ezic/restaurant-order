@@ -37,6 +37,10 @@ class Order
      */
     public function __construct(int $id, string $status, DateTimeImmutable $date, Customer $customer)
     {
+        $this->id = $id;
+        $this->status = $status;
+        $this->date = $date;
+        $this->customer = $customer;
     }
 
     /**

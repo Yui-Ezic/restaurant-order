@@ -29,6 +29,9 @@ class Customer
      */
     public function __construct(int $id, string $full_name, string $phone)
     {
+        $this->id = $id;
+        $this->full_name = $full_name;
+        $this->phone = $phone;
     }
 
     /**
