@@ -65,7 +65,7 @@ class CustomerRepository implements CustomerRepositoryInterface
             return;
         }
 
-        throw new InvalidArgumentException('Cannot create non Order class: ' . get_class($item));
+        throw new InvalidArgumentException('Cannot create non Customer class: ' . get_class($item));
     }
 
     /**
@@ -81,7 +81,7 @@ class CustomerRepository implements CustomerRepositoryInterface
             return;
         }
 
-        throw new InvalidArgumentException('Cannot create non Order class: ' . get_class($item));
+        throw new InvalidArgumentException('Cannot create non Customer class: ' . get_class($item));
     }
 
     /**
