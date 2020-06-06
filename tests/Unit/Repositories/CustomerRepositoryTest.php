@@ -9,7 +9,7 @@ use App\Repositories\CustomerRepository;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class CustomerRepositoryTest extends TestCase
 {
