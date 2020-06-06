@@ -7,26 +7,28 @@ namespace Repositories;
 use App\Entities\Customer;
 use App\Repositories\CustomerRepository;
 use Illuminate\Database\Query\Builder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class CustomerRepositoryTest extends TestCase
 {
-    use RefreshDatabase;
+    use WithFaker;
 
     private function getCustomer(): Customer
     {
         return new Customer(
-            1,
-            'Random Name',
-            '+380935694856'
+            $this->faker->unique()->randomDigitNotNull,
+            $this->faker->name,
+            $this->faker->phoneNumber
         );
     }
 
     protected function setUp(): void
     {
+        parent::setUp();
         DB::clearResolvedInstances();
+        $this->setUpFaker();
     }
 
     public function testCreate(): void
