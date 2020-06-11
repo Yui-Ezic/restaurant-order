@@ -4,10 +4,17 @@
 namespace App\Entities;
 
 
+use App\Events\OrderConfirmed;
 use DateTimeImmutable;
 
 class Order
 {
+    private const STATUS_NEW = 'New';
+    private const STATUS_CONFIRMED = 'Confirmed';
+    private const STATUS_CANCELED = 'Canceled';
+    private const STATUS_PAID = 'Paid';
+    private const STATUS_COMPLETED = 'Completed';
+
     /**
      * @var int
      */
@@ -38,7 +45,7 @@ class Order
     public function __construct(int $id, string $status, DateTimeImmutable $date, Customer $customer)
     {
         $this->id = $id;
-        $this->status = $status;
+        $this->status = $status ?: self::STATUS_NEW;
         $this->date = $date;
         $this->customer = $customer;
     }
@@ -73,5 +80,26 @@ class Order
     public function getCustomer(): Customer
     {
         return $this->customer;
+    }
+
+    public function confirm(): void
+    {
+        $this->status = self::STATUS_CONFIRMED;
+        event(new OrderConfirmed($this));
+    }
+
+    public function pay(): void
+    {
+        $this->status = self::STATUS_PAID;
+    }
+
+    public function cancel(): void
+    {
+        $this->status = self::STATUS_CANCELED;
+    }
+
+    public function complete(): void
+    {
+        $this->status = self::STATUS_COMPLETED;
     }
 }
