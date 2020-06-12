@@ -111,4 +111,24 @@ class OrderRepository implements OrderRepositoryInterface
     {
         $this->getConnection()->delete($id);
     }
+
+    /**
+     * @param int $page
+     * @param int $ordersByPage
+     * @return Order[]
+     * @throws Exception
+     */
+    public function getAllPaginated(int $page, int $ordersByPage): array
+    {
+        $offset = $ordersByPage * ($page - 1);
+        $result = $this->getConnection()->offset($offset)->limit($ordersByPage)->get();
+        $orders = [];
+
+        foreach ($result as $order) {
+            $customer = $this->customerRepository->findById($order->customer_id);
+            $orders[] = new Order($order->id, $order->status, new DateTimeImmutable($order->date), $customer);
+        }
+
+        return $orders;
+    }
 }
